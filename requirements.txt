@@ -1,0 +1,15 @@
+asgiref==3.5.2
+backoff==2.2.1
+Django==3.2
+django_split_settings==1.2.0
+elasticsearch==8.6.2
+flake8==4.0.0
+mccabe==0.6.1
+pycodestyle==2.8.0
+pyflakes==2.4.0
+python-dotenv==0.21.0
+psycopg2-binary==2.9.5
+pytz==2022.5
+redis==4.5.1
+requests==2.28.2
+sqlparse==0.4.3

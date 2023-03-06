@@ -1,3 +1,5 @@
-# Заключительное задание первого модуля
+# Отказоустойчивый перенос данных из Postgres в Elasticsearch
 
-Ваша задача в этом уроке — загрузить данные в Elasticsearch из PostgreSQL. Подробности задания в папке `etl`.
+Для загрузки данных из PostgreSQL в ElasticSearch необходимо запустить команду из терминала
+
+## python load_data_to_elastic.py
