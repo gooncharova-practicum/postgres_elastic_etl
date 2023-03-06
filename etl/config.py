@@ -1,18 +1,19 @@
+import datetime
 import os
 
 from dotenv import load_dotenv
-import datetime
+from pydantic import BaseSettings, Field
 
 load_dotenv()
 
 
-dsl = {
-    'dbname': os.environ.get('DB_NAME'),
-    'user': os.environ.get('DB_USER'),
-    'password': os.environ.get('DB_PASSWORD'),
-    'host': os.environ.get('DB_HOST', '127.0.0.1'),
-    'port':  os.environ.get('DB_PORT', 5432),
-    }
+class PostgresSettings(BaseSettings):
+    dbname: str = Field(..., env='DB_NAME')
+    user: str = Field(..., env='DB_USER')
+    password: str = Field(..., env='DB_PASSWORD')
+    host: str = Field(..., env='DB_HOST')
+    port: str = Field(..., env='DB_PORT')
+    options: str = '-c search_path=content'
 
 es_url = f"http://{os.environ.get('ELASTIC_HOST', '127.0.0.1')}:{os.environ.get('ELASTIC_PORT', 9200)}"
 
@@ -22,7 +23,16 @@ redis_dsl = {
     'db': os.environ.get('REDIS_DB', 0)
     }
 
+# при отсутствии последнего стейта (чаще всего при первом запуске) берем этот дейттайм
 default_modified_date = datetime.datetime(1900, 1, 1, 0, 0, 0)
+
+# время ожидания
+sleep_time = 100
+
+# ключи для сохранения стейтов из разных таблиц
+redis_keys = {'film_work': 'film_work_modified', 'genre': 'genre_modified', 'person': 'person_modified'}
+
+postgres_scheme_name = 'content'
 
 # имя индекса 
 index_name = 'movies' 

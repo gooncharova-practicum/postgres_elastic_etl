@@ -42,4 +42,6 @@ class State:
 
     def get_state(self, key: str) -> Any:
         """Получить состояние по определённому ключу"""
-        return self.storage.retrieve_state(key).decode('utf-8')
+        state = self.storage.retrieve_state(key)
+        if state:
+            return state.decode('utf-8')
